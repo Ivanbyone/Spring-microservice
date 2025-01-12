@@ -20,3 +20,8 @@ jobs:
           distribution: 'temurin'
       - name: Build with Maven
         run: mvn -B clean package
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Run tests
+          run: mvn test
