@@ -23,4 +23,4 @@ jobs:
           cache: 'maven'
 
       - name: run tests
-        uses: mvn clean test
+        run: mvn clean test
