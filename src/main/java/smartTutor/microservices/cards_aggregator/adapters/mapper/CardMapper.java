@@ -5,6 +5,9 @@ import smartTutor.microservices.cards_aggregator.adapters.common.CardMapped;
 import smartTutor.microservices.cards_aggregator.application.common.dto.output.GetCardByIdDto;
 import smartTutor.microservices.cards_aggregator.domain.common.ICard;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class CardMapper {
 
@@ -27,5 +30,19 @@ public class CardMapper {
                 doc.getPricePerHour(),
                 doc.getTags(),
                 doc.getCreatedAt());
+    }
+
+    public List<GetCardByIdDto> toListCards(List<CardMapped> mapped) {
+        if (mapped == null) {
+            return null;
+        }
+
+        ArrayList<GetCardByIdDto> list = new ArrayList<>();
+
+        for (CardMapped cardMapped : mapped) {
+            list.add(toCardDto(cardMapped));
+        }
+
+        return list;
     }
 }
