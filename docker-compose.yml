@@ -1,0 +1,28 @@
+version: '3.6'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: "tutors_app_mongodb"
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+  cards_microservice:
+    container_name: "tutor_app"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/smart_tutor
+
+networks:
+  app-network:
+    driver: bridge
